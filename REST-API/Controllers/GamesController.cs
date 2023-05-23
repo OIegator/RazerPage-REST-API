@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace REST_API.Controllers
 {
     [ApiController]
     [Route("Games")]
+    [Authorize]
     public class GamesController : ControllerBase
     {
         private readonly DBContext _context;
@@ -107,8 +109,6 @@ namespace REST_API.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index2));
         }
-
-
 
         private bool GameExists(int? id)
         {
